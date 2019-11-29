@@ -68,23 +68,15 @@ function SWEP:Initialize()
 	self:SetHoldType("pistol")
 end
 
-local function getsomename(ent)
-local name = ""
-if ent:IsRagdoll() then
-name = ent:Nick()
-end
-return name
-end
-local function switch(path,dmginfo)
-local ent = path.Entity
-local att = dmg.GetAttacker()
-if not (ent:IsRagdoll() || (ent:IsNPC() && GetConVarString("gamemode") == "sandbox")) then return end
-local hitpos = ent:GetPos()
-local selfpos = att:GetPos()
-ent:SetPos(selfpos)
+hook.Add("EntityTakeDamage","ragdoll_tele_gun", function(ent, dmginfo)
+    if ent:GetClass() ~= "prop_ragdoll" then return end
 
+    local att = dmginfo:GetAttacker()
 
-end
+    if att:GetActiveWeapon():GetClass() ~= "weapon_ttt_corpseporter" then return end
+
+    ent:SetPos(att:GetPos())
+end)
 
 function SWEP:PrimaryAttack(worldsnd)
  
