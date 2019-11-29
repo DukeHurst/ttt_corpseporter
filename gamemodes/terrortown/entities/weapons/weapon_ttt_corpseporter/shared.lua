@@ -77,6 +77,7 @@ return name
 end
 local function switch(path,dmginfo)
 local ent = path.Entity
+local att = dmg.GetAttacker()
 if not (ent:IsRagdoll() || (ent:IsNPC() && GetConVarString("gamemode") == "sandbox")) then return end
 local hitpos = ent:GetPos()
 local selfpos = att:GetPos()
