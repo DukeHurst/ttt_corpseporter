@@ -79,7 +79,7 @@ local function switch(path,dmginfo)
 local ent = path.Entity
 if not (ent:IsRagdoll() || (ent:IsNPC() && GetConVarString("gamemode") == "sandbox")) then return end
 local hitpos = ent:GetPos()
-local selfpos = LocalPlayer():GetPos()
+local selfpos = att:GetPos()
 ent:SetPos(selfpos)
 
 
